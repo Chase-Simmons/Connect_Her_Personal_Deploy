@@ -74,3 +74,15 @@ VALUES (1, 357), (1, 388), (1, 389), (1, 300), (1, 381),
       (7, 398), (7, 414), (7, 415), (7, 436), (7, 87),
       (8, 494), (8, 544), (8, 532), 
       (8, 520), (8, 512), (8, 511), (8, 488), (8, 489);
+
+INSERT INTO "demographic" (age, ethnicity, gender, sexual_orientation, ability, income, education, user_id)
+VALUES ('18-24', 'multiracial', 'Female/Female Identifying', 'straight', 'I do not have a disability', '$40000-79999', 'some college', 1)
+
+CREATE TABLE "Member_Level" (
+    "id" SERIAL PRIMARY KEY,
+    "user_id" int REFERENCES "users",
+    "access_level" int 
+);
+
+INSERT INTO "member_level" (user_id, member_level) 
+VALUES (1, 2), (2,3), (3,3),(4,1),(5,4),(6,3), (7,2), (8,1)

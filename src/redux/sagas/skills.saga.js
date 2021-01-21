@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { put, takeLatest } from 'redux-saga/effects';
+import { connect_service } from '../../services/connect_service';
 
 // worker Saga: will be fired on "FETCH_USER" actions
 function* getSkills(action) {
@@ -63,12 +64,23 @@ function* getSkills(action) {
   }
 }
 
+function* getAllSkills(action) {
+  try {
+    const response = yield connect_service.get('/skills/all');
+    yield put({
+      type: 'SET_ALL_SKILLS',
+      payload: response.data,
+    })
+  } catch (err) {
+    console.log('Error retreiving ALL SKILLS');
+  }
+}
+
 function* getProfileSkills(action) {
   try {
     const response = yield axios.get(
       `/api/skills/profile-list/${action.payload}`
     );
-    console.log(response.data);
     yield put({
       type: 'SET_PROFILE_SKILLS',
       payload: response.data,
@@ -80,6 +92,7 @@ function* getProfileSkills(action) {
 
 function* skillsSaga() {
   yield takeLatest('GET_SKILLS', getSkills);
+  yield takeLatest('GET_ALL_SKILLS', getAllSkills);
   yield takeLatest('GET_PROFILE_SKILLS', getProfileSkills);
   // yield takeLatest('FINAL_SUBMIT', );
 }

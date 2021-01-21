@@ -65,6 +65,25 @@ CREATE TABLE "about" (
     "user_id" int REFERENCES "users" 
 );
 
+CREATE TABLE "favorites" (
+    "id" SERIAL PRIMARY KEY,
+    "user_id" int REFERENCES "users",
+    "favorite_id" VARCHAR (128),
+    "favorite_type" VARCHAR (16)
+);
+
+CREATE TABLE "chat_instance" (
+"id" SERIAL PRIMARY KEY,
+"user_1" INT REFERENCES "users",
+"user_2" INT REFERENCES "users"
+);
+
+CREATE TABLE "messages" (
+"id" SERIAL PRIMARY KEY,
+"chat_id" INT REFERENCES "chat_instance",
+"user" INT REFERENCES "users",
+"message" VARCHAR(256)
+);
 -- starter categories
 INSERT INTO "category" ("name")
 VALUES 
