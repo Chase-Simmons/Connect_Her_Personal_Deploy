@@ -26,6 +26,7 @@ function* updateProfile(action) {
       `/api/profile/user/${action.payload.id}`,
       action.payload.profile
     );
+    yield axios.put(`/api/user/level/${action.payload.id}`, action.payload);
     yield put({
       type: 'FETCH_USER',
       payload: action.payload.id,
@@ -51,6 +52,33 @@ function* getAllProfiles(action) {
       };
     });
     yield put({ type: 'SET_MEMBER_LISTINGS', payload: profiles });
+    yield put({
+      type: 'GET_AGE_DEMO',
+    });
+    yield put({
+      type: 'GET_ETHNICITY_DEMO',
+    });
+    yield put({
+      type: 'GET_GENDER_DEMO',
+    });
+    yield put({
+      type: 'GET_SEX_DEMO',
+    });
+    yield put({
+      type: 'GET_LEVEL_LIST',
+    });
+    yield put({
+      type: 'GET_ABILITY_DEMO',
+    });
+    yield put({
+      type: 'GET_INCOME_DEMO',
+    });
+    yield put({
+      type: 'GET_EDUCATION_DEMO',
+    });
+    yield put({
+      type: 'GET_USER',
+    });
     // yield put({ type: 'SET_MEMBER_LISTINGS', payload: response.data });
   } catch (error) {
     console.log('getAllProfiles failed. Please try again.', error);

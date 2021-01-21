@@ -188,7 +188,8 @@ class SpeakerList extends React.Component {
             style={{
               backgroundColor: '#d6f3f3',
               boxShadow: '0 2px 4px #11111150',
-              borderRadius: '5px',
+              borderTop: '1px solid #11111150',
+              borderRadius: '0 0 5px 5px',
             }}
           >
             <Row>
@@ -236,6 +237,7 @@ class SpeakerList extends React.Component {
                     listStyleType: 'none',
                     color: '#111111d0',
                     fontFamily: 'cabin',
+                    marginTop: -10,
                   }}
                 >
                   <li className="mb-2">
@@ -243,6 +245,7 @@ class SpeakerList extends React.Component {
                       style={{ cursor: 'pointer' }}
                       className="ni ni-email-83 mr-2"
                     />
+
                     {this.props.speaker.fields.Email}
                   </li>
                   <li className="mb-2">
@@ -257,16 +260,21 @@ class SpeakerList extends React.Component {
                       style={{ cursor: 'pointer' }}
                       className="ni ni-laptop mr-2"
                     />
+
                     {this.props.speaker.fields['Website']}
                   </li>
                 </ul>
               </Col>
             </Row>
-            <hr />
+            <hr style={{ marginTop: -10 }} />
             <Row>
               <Col lg={{ size: 10, offset: 1 }}>
                 <p
-                  style={{ color: '#111111d0', fontFamily: 'lato' }}
+                  style={{
+                    marginTop: -10,
+                    color: '#111111d0',
+                    fontFamily: 'lato',
+                  }}
                   className="font-weight-light mt-2"
                 >
                   {this.props.speaker.fields['Speaker Bio']}

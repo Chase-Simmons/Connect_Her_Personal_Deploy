@@ -184,7 +184,7 @@ class MemberItem extends Component {
                 >
                   {member.job_title} at {member.organization_name}
                 </p>
-                <hr style={{ marginTop: '-5px' }} />
+                <hr style={{ marginTop: '-12px' }} />
                 <Button
                   block
                   outline
@@ -223,7 +223,8 @@ class MemberItem extends Component {
             style={{
               backgroundColor: '#d6f3f3',
               boxShadow: '0 2px 4px #11111150',
-              borderRadius: '5px',
+              borderTop: '1px solid #11111150',
+              borderRadius: '0 0 5px 5px',
             }}
           >
             <Row>
@@ -235,15 +236,7 @@ class MemberItem extends Component {
                     borderRadius: '50%',
                   }}
                 >
-                  <img
-                    style={{
-                      objectFit: 'cover',
-                      width: '122px',
-                      height: '122px',
-                    }}
-                    src={member.headshot}
-                    alt="img"
-                  />
+                  {function_list.detailsCardImage(member.headshot).modalTag}
                 </div>
                 <div
                   style={{
@@ -265,29 +258,32 @@ class MemberItem extends Component {
                 >
                   {member.job_title} at {member.organization_name}
                 </p>
-                <Button
+                <ul
                   style={{
-                    marginTop: '-100px !important',
-                    border: '1px solid white',
-                    width: '150px',
-                    backgroundColor: '#17c3ca',
-                    border: '1px solid #17c3ca',
-                    color: '#f7fafc',
-                    boxShadow: '0 2px 4px #11111150',
+                    listStyleType: 'none',
+                    color: '#111111d0',
+                    fontFamily: 'cabin',
                   }}
-                  outline
-                  block
-                  size="sm"
-                  onClick={this.handleListingClick}
                 >
-                  Contact Now
-                </Button>
+                  <li
+                    className="mb-2"
+                    style={{ fontFamily: 'cabin', color: '#111111d0' }}
+                  >
+                    <i
+                      style={{
+                        marginLeft: -40,
+                      }}
+                      className="ni ni-email-83 mr-2"
+                    />
+                    {member.email}
+                  </li>
+                </ul>
               </Col>
               <Col lg={6} className="text-left p-5">
                 <h3
                   className="lead mb-0"
                   style={{
-                    marginTop: '0px',
+                    marginTop: -50,
                     color: '#111111d0',
                     fontFamily: 'cabin',
                   }}
@@ -296,7 +292,8 @@ class MemberItem extends Component {
                 </h3>
                 <div
                   style={{
-                    height: '90px',
+                    marginTop: 0,
+                    height: '100px',
                     overflow: 'scroll',
                   }}
                 >
@@ -316,11 +313,12 @@ class MemberItem extends Component {
                 </div>
               </Col>
             </Row>
-            <hr />
-            <Row>
+            <hr style={{ marginTop: -10 }} />
+            <Row style={{ marginTop: -10 }}>
               <Col lg={{ size: 10, offset: 1 }}>
                 <p
                   style={{
+                    marginTop: -10,
                     color: '#111111d0',
                     fontFamily: 'cabin',
                   }}

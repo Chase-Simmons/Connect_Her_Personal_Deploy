@@ -12,3 +12,12 @@
   position: relative;
   top: 1px;
 }
+
+.modal-background {
+  background-color: #bceef0;
+}
+
+.desktopDevice {
+  display: none !important;
+  margin-top: 100;
+}

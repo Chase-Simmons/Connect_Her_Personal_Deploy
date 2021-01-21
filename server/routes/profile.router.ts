@@ -31,8 +31,9 @@ router.get(
 router.get(
   '/members',
   (req: Request, res: Response, next: express.NextFunction): void => {
-    const queryText = `SELECT display_name, community_role, organization_name, mentor, mentee, job_title, headshot, bio, email, first_name, last_name, twitter, facebook, linkedin, instagram, user_id   FROM about
-                        JOIN "users" ON "about".user_id= "users".id;`;
+    const queryText = `SELECT display_name, community_role, organization_name, mentor, mentee, job_title, headshot, bio, email, first_name, last_name, address, city, state, zip_code, access_level, twitter, facebook, linkedin, instagram, member_level, "about".user_id FROM about
+    JOIN "users" ON "about".user_id= "users".id
+    JOIN "member" ON "users".id = "member".user_id;`;
     pool
       .query(queryText, [])
       .then((response) => {
@@ -77,7 +78,7 @@ router.put(
     const profile = req.body;
 
     const queryText = `UPDATE "about" SET display_name = $1, address = $2, bio = $3, city = $4, community_role = $5, facebook = $6, headshot = $7, instagram = $8,
-                      job_title = $9, linkedin = $10, organization_name = $11, state = $12, twitter = $13, zip_code = $14 WHERE user_id = $15;`;
+                      job_title = $9, linkedin = $10, mentee = $11, mentor = $12, organization_name = $13, state = $14, twitter = $15, zip_code = $16 WHERE user_id = $17;`;
     pool
       .query(queryText, [
         profile.display_name,
@@ -90,6 +91,8 @@ router.put(
         profile.instagram,
         profile.job_title,
         profile.linkedin,
+        profile.mentee,
+        profile.mentor,
         profile.organization_name,
         profile.state,
         profile.twitter,
@@ -115,12 +118,13 @@ router.put(
     const userId = req.params.id;
     const profile = req.body;
 
-    const query = `UPDATE "users" SET email = $1, first_name = $2, last_name = $3 WHERE id = $4;`;
+    const query = `UPDATE "users" SET email = $1, first_name = $2, last_name = $3, access_level = $4 WHERE id = $5;`;
     pool
       .query(query, [
         profile.email,
         profile.first_name,
         profile.last_name,
+        profile.access_level,
         userId,
       ])
       .then((dbResponse) => {

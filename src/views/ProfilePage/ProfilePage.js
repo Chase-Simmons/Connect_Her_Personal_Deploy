@@ -3,6 +3,10 @@ import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import _ from 'lodash';
 import LogOutButton from '../../components/LogOutButton/LogOutButton';
+import MemberPersonalityForm from '../../components/MemberPersonalityForm/MemberPersonalityForm';
+import MentorSurveyForm from '../../components/MemberMentorSurvey/MemberMentorSurvey';
+import IndustryModal from '../../components/IndustryModal/IndustryModalButton';
+
 import './ProfilePage.css';
 import function_list from '../../functions/list';
 import style_list from '../../styles/list';
@@ -14,6 +18,8 @@ import {
   Button,
   Card,
   CardBody,
+  Modal,
+  ModalBody,
   Input,
   CardText,
   Label,
@@ -21,6 +27,9 @@ import {
   Badge,
 } from 'reactstrap';
 import ImageUpload from '../../services/ImageUpload/ImageUpload';
+import CareerModal from '../../components/CareerModal/CareerModal';
+import SelectedIndustryButton from '../../components/IndustryModal/SelectedIndustryButton';
+import MemberPersonalityModal from '../../components/MemberPersonalityForm/MemberPersonalityModal';
 // Basic class component structure for React with default state
 // value setup. When making a new component be sure to replace
 // the component name TemplateClass with the name for the new
@@ -30,13 +39,33 @@ class ProfilePage extends Component {
     profile: {},
     update: false,
     picEdit: false,
+    defaultModal: false,
+    defaultModal2: false,
+    isOpen: false,
   };
+
   componentDidMount() {
     this.setState({
       profile: this.props.store.profile,
       update: false,
     });
+    this.props.dispatch({
+      type: 'GET_INDUSTRIES',
+    });
+    this.props.dispatch({
+      type: 'GET_CAREER_LEVELS',
+    });
+    this.props.dispatch({
+      type: 'GET_PERSONALITY',
+      payload: this.props.store.user.id,
+    });
   }
+
+  toggleModal = (state) => {
+    this.setState({
+      [state]: !this.state[state],
+    });
+  };
 
   handleChange = (key) => (event) => {
     this.setState({
@@ -72,6 +101,31 @@ class ProfilePage extends Component {
   };
 
   render() {
+    // const htmlArray = this.props.store.userCareerLevel.map((item, index) => {
+    //   return <h2 key={index} item={item.name} />;
+    // });
+
+    let career = <CareerModal />;
+    if (
+      this.props.store.userCareerLevel.name != '' &&
+      this.props.store.userCareerLevel.name != null
+    ) {
+      career = (
+        <Input
+          id="display_name"
+          type="text"
+          placeholder={this.props.store.userCareerLevel.name}
+        />
+      );
+    }
+    let personality = <MemberPersonalityModal />;
+    if (
+      this.props.store.personality.id != '' &&
+      this.props.store.personality.id != null
+    ) {
+      personality = null;
+    }
+
     const profilePic = require('./profilePic.jpg');
 
     let image = (
@@ -129,8 +183,9 @@ class ProfilePage extends Component {
                   <CardHeader
                     style={{
                       boxShadow: '0 2px 4px #11111150',
-                      borderRadius: '5px',
+                      borderRadius: '5px 5px 0px 0px',
                       height: '60px',
+                      margin: '-1px -1px 0 -1px',
                     }}
                     className="bg-white"
                   >
@@ -427,6 +482,34 @@ class ProfilePage extends Component {
                         />
                       </Col>
                     </Row>
+                    <Row>
+                      <Col lg={6}>
+                        <Label
+                          style={{
+                            fontFamily: 'Cabin',
+                            color: '#111111d0',
+                          }}
+                          htmlFor="organization_name"
+                          className="form-control-label"
+                        >
+                          Industry:
+                        </Label>
+                        <SelectedIndustryButton />
+                      </Col>
+                      <Col lg={6}>
+                        <Label
+                          style={{
+                            fontFamily: 'Cabin',
+                            color: '#111111d0',
+                          }}
+                          htmlFor="job_title"
+                          className="form-control-label"
+                        >
+                          Career Level:
+                        </Label>
+                        {career}
+                      </Col>
+                    </Row>
                     <hr />
                     <CardText
                       style={{
@@ -616,23 +699,6 @@ class ProfilePage extends Component {
                     >
                       <i>{this.props.store.profile.organization_name}</i>{' '}
                     </p>{' '}
-                    <Button
-                      outline
-                      style={{
-                        backgroundColor: '#17c3ca',
-                        border: '1px solid white',
-                        color: '#f7fafc',
-                        boxShadow: '0 2px 4px #11111150',
-                        marginBottom: 15,
-                        marginLeft: 10,
-                        marginTop: -5,
-                      }}
-                      size="sm"
-                      className="profile-button"
-                      onClick={this.switchPic}
-                    >
-                      Change Profile Picture
-                    </Button>
                     <hr style={{ marginTop: '0px' }} />
                     <p
                       style={{
@@ -759,6 +825,28 @@ class ProfilePage extends Component {
                         </a>
                       </Col>
                     </Row>
+                    <Button
+                      block
+                      style={{
+                        marginLeft: '5px',
+                        marginTop: '15px',
+                        backgroundColor: 'white',
+                        boxShadow: '0 2px 4px #11111150',
+                        border: '1px solid #AAA',
+                        marginBottom: '10px',
+                        height: 45,
+                        fontFamily: 'cabin',
+                        fontSize: 15,
+                        color: '#11111150',
+                      }}
+                      size="sm"
+                      className="profile-button"
+                      onClick={this.switchPic}
+                    >
+                      Change Profile Picture
+                    </Button>
+                    {personality}
+                    {/* <MemberPersonalityModal /> */}
                     <br />
                     <Row>
                       <Col className="text-center">
@@ -773,6 +861,58 @@ class ProfilePage extends Component {
             </Row>
           </Container>
         )}
+        <Modal
+          className="modal-dialog-centered"
+          size="lg"
+          isOpen={this.state.defaultModal}
+          toggle={() => this.toggleModal('defaultModal')}
+        >
+          <button
+            aria-label="Close"
+            className="close m-2 "
+            data-dismiss="modal"
+            type="button"
+            onClick={() => this.toggleModal('defaultModal')}
+          >
+            <span aria-hidden={true}>×</span>
+          </button>
+          <ModalBody
+            style={{
+              backgroundColor: '#d6f3f3',
+              boxShadow: '0 2px 4px #11111150',
+              borderTop: '1px solid #11111150',
+              borderRadius: '0 0 5px 5px',
+            }}
+          >
+            <MemberPersonalityForm />
+          </ModalBody>
+        </Modal>
+        <Modal
+          className="modal-dialog-centered"
+          size="lg"
+          isOpen={this.state.defaultModal2}
+          toggle={() => this.toggleModal('defaultModal2')}
+        >
+          <button
+            aria-label="Close"
+            className="close m-2 "
+            data-dismiss="modal"
+            type="button"
+            onClick={() => this.toggleModal('defaultModal2')}
+          >
+            <span aria-hidden={true}>×</span>
+          </button>
+          <ModalBody
+            style={{
+              backgroundColor: '#d6f3f3',
+              boxShadow: '0 2px 4px #11111150',
+              borderTop: '1px solid #11111150',
+              borderRadius: '0 0 5px 5px',
+            }}
+          >
+            <MentorSurveyForm />
+          </ModalBody>
+        </Modal>
       </Container>
     );
   }

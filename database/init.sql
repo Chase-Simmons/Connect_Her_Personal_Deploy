@@ -2,13 +2,16 @@
 -- You must use double quotes in every query that user is in:
 -- ex. SELECT * FROM "user";
 -- Otherwise you will have errors!
+
 CREATE TABLE "users" (
     "id" SERIAL PRIMARY KEY,
     "email" VARCHAR (150) UNIQUE NOT NULL,
     "first_name" VARCHAR (100) NOT NULL,
     "last_name" VARCHAR (100) NOT NULL,
-    "password" VARCHAR (1000) NOT NULL
+    "password" VARCHAR (1000) NOT NULL,
+    "access_level" INT
 );
+
 CREATE TABLE "demographic" (
     "id" SERIAL PRIMARY KEY,
     "age" VARCHAR (150),
@@ -84,6 +87,43 @@ CREATE TABLE "messages" (
 "user" INT REFERENCES "users",
 "message" VARCHAR(256)
 );
+
+CREATE TABLE "member" (
+    "id" SERIAL PRIMARY KEY,
+    "user_id" int REFERENCES "users",
+    "member_level" int 
+);
+
+CREATE TABLE "personality" (
+    "id" SERIAL PRIMARY KEY,
+    "user_id" INT REFERENCES "users",
+    "myers_briggs" VARCHAR(25),
+     "disc" VARCHAR(25),
+     "agility_index" VARCHAR (25),
+      "enneagram" VARCHAR(25)
+);
+
+CREATE TABLE "industry" (
+    "id" SERIAL PRIMARY KEY,
+ 	"name" VARCHAR (100)
+);
+
+CREATE TABLE "careerLevel" (
+    "id" SERIAL PRIMARY KEY,
+ 	"name" VARCHAR (100)
+);
+
+CREATE TABLE "userIndustry" (
+    "id" SERIAL PRIMARY KEY,
+    "user_id" INT REFERENCES "users",
+ 	"selected" INT REFERENCES "industry"
+);
+
+CREATE TABLE "userCareerLevel" (
+    "id" SERIAL PRIMARY KEY,
+    "user_id" INT REFERENCES "users",
+ 	"selected" INT REFERENCES "careerLevel");
+ 	
 -- starter categories
 INSERT INTO "category" ("name")
 VALUES 

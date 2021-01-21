@@ -11,6 +11,9 @@ import demographicSaga from './demographic.saga';
 import favoritesSaga from './favorites.saga';
 import memberSaga from './memberLevel.saga';
 import chatSaga from './chat.saga';
+import personalitySaga from './personality.saga';
+import industriesSaga from './industry.saga';
+import careerSaga from './careerLevel.saga';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -34,5 +37,8 @@ export default function* rootSaga() {
     favoritesSaga(),
     memberSaga(),
     chatSaga(),
+    personalitySaga(),
+    industriesSaga(),
+    careerSaga(),
   ]);
 }

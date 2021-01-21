@@ -5,7 +5,6 @@ import { Row, Col, Card, CardBody, Button, Modal, ModalBody } from 'reactstrap';
 
 import function_list from '../../functions/list'; // custom functions object
 import style_list from '../../styles/list'; // custom styles object
-// import './SpacesList.css';
 //import BootstrapTable from 'react-bootstrap-table-next';
 //import filterFactory, { selectFilter } from 'react-bootstrap-table2-filter'; //Want to add filtering
 
@@ -156,13 +155,13 @@ class SpacesList extends React.Component {
                 <p style={style_list.card.detailsP1}>
                   Capacity: {this.props.space.fields.Capacity}
                 </p>
-                <p style={style_list.card.detailsP2}>
+                {/* <p style={style_list.card.detailsP2}>
                   Womxn Owned?: {this.props.space.fields['Womxn Owned?']}
-                </p>
+                </p> */}
 
                 <hr
                   style={{
-                    marginTop: '-11px',
+                    marginTop: '20px',
                   }}
                 />
                 <Button
@@ -198,7 +197,8 @@ class SpacesList extends React.Component {
             style={{
               backgroundColor: '#d6f3f3',
               boxShadow: '0 2px 4px #11111150',
-              borderRadius: '5px',
+              borderTop: '1px solid #11111150',
+              borderRadius: '0 0 5px 5px',
             }}
           >
             <Row>
@@ -237,6 +237,7 @@ class SpacesList extends React.Component {
                     listStyleType: 'none',
                     color: '#111111d0',
                     fontFamily: 'cabin',
+                    marginTop: -10,
                   }}
                 >
                   <li className="mb-2">
@@ -263,8 +264,8 @@ class SpacesList extends React.Component {
                 </ul>
               </Col>
             </Row>
-            <hr />
-            <Row>
+            <hr style={{ marginTop: -10 }} />
+            <Row style={{ marginTop: -10 }}>
               <Col lg={{ size: 10, offset: 1 }}>
                 <p
                   style={{

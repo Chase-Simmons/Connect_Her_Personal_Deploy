@@ -9,6 +9,7 @@ import SearchItems from './skills_selector_components/SearchItems/SearchItems';
 import SelectedSkills from './skills_selector_components/SelectedSkills/SelectedSkills';
 import style_list from '../../styles/list';
 import function_list from '../../functions/list';
+import SkillsWidget from '../SkillsWidget/SkillsWidget';
 
 const SkillsSelector = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -33,19 +34,29 @@ const SkillsSelector = () => {
     <div>
       <div style={{ ...style_list.register.form_base, padding }}>
         <div style={{ padding: '5px' }}>
-          <h1 style={{ display: 'inline-block' }}>Skills</h1>
+          <h1
+            style={{
+              display: 'inline-block',
+              fontFamily: 'cabin',
+              color: '#111111d0',
+              marginTop: 8,
+              paddingLeft: 5,
+            }}
+          >
+            Skills:
+          </h1>
           <SelectedSkills />
           <ModalBox
             component={
               <>
-                <div className={styles.searchBar}>
+                {/* <div className={styles.searchBar}>
                   <input
                     type="text"
                     placeholder="Search for skills"
                     onChange={handleSearch}
                   />
-                </div>
-                <div className={styles.container}>
+                </div> */}
+                {/* <div className={styles.container}>
                   {skills && allSkills && (
                     <SearchItems
                       items={allSkills}
@@ -54,12 +65,14 @@ const SkillsSelector = () => {
                     />
                   )}
                   <p>
-                    Select skills you wish to add. Try searching for a term.
+                    Select as many skills as you'd like! Try searching for
+                    terms.
                   </p>
-                  <br />
+
                   <p>Example: "Public Speaking"</p>
-                </div>
-                <SelectedSkills />
+                </div> */}
+                {/* <SelectedSkills /> */}
+                <SkillsWidget />
               </>
             }
           />
