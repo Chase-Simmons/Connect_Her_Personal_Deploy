@@ -2,7 +2,7 @@
 
 ## Description
 
-_Duration: 3 Week Sprint_
+_Duration: 2 Week Sprint_
 
 InnovateHER KC, a nonprofit in Kansas City, MO committed to supporting all womxn, promoting diversity, and advancing its member’s professional goals—came to Prime Digital Academy with a challenge.
 
@@ -16,8 +16,8 @@ To see the fully functional site, please visit: [ConnectHER](https://ancient-woo
 
 ## Screen Shots
 
-![Screenshot](public/Screen2.png)
-![Screenshot](public/Screen1.png)
+![image](https://user-images.githubusercontent.com/67838283/105495266-96794a80-5c81-11eb-8d8a-5b5776aa6713.png)
+![image](https://user-images.githubusercontent.com/67838283/105497100-0983c080-5c84-11eb-9a90-7b8509ee8afe.png)
 
 ### Prerequisites
 
@@ -58,17 +58,19 @@ Steps:
 
 Note: For testing purposes, test accounts and data are currently initialized with the project upon build. These lines can be removed and are not entirely necessary, but may prove helpful as a tool to show off the application
 
-1. Register and/or login to the application. If you’re creating a new account, you’re directed to the ‘Step 1 - About Me’ tab. Complete the forms on tabs 1-3 by providing the necessary information, and click ‘Submit.’
+1. Register and/or login to the application. If you’re creating a new account, first select a membership plan and you’re directed to the ‘Step 1 - User Information’ tab. Complete the forms on tabs 1-4 by providing the necessary information, and click ‘Submit.’
 
 2. After logging into your account, you see the Landing Page. Note, you can also reach this page by selecting ‘Home’ in the top nav bar.
 
-The Landing Page contains a brief summary of your own information and an option to ‘View Profile.’ You can also view and edit your profile information by selecting ‘Profile’ in the top nav bar.
+The Landing Page contains four links for "Community", "Speakers", "Work Spaces", and "Businesses". Clicking `Learn More` associated with each title will take you to that page. You can also view and edit your profile information by selecting ‘Profile’ in the top nav bar.
 
-Additionally, the page contains one large button at the very top labeled ‘IHKC Community,’ and below, you see three smaller buttons labeled as follows: “‘Find a Business,’ ‘Find a Speaker,’ ‘Find a Space.’”
+3. To search through the community of members, select the ‘Community’ button from the landing page or the nav bar. After navigating to the Search Page, you can find members by inputting a job title, community role, organization name, display name, or mentor/mentee. You have the option to search by skills by clicking `Add` in the skills bar. This will prompt a modal with all the skills in categories. Clicking on a skill will insert that skill into the search filter. When the search results appear, clicking the `Learn More` button a modal will pop up with the users profile information.
 
-3. To search through the community of members, select the ‘IHKC Community’ button. After navigating to the Search Page, you can find members by inputting a job title, community role, or an organization name. When the search results appear, clicking the down carrot shows more information about a user and let’s you contact them from within the app.
+4. On each the members of the community, speakers, businesses, and spaces, there is a a heart icon that can be clicked to favorite the location/member, this will save them to the favorites/chat component located in the bottom right corner of the viewport with the heart icon. each are grouped into their respective categories.The Chat Feature is located within the same component as the Favorites and can be accessed by clicked the chat image right above the favorites, this is display all active chat instances. to begin a chat a user must have another user favorited, and click on them in the favorites menu. A drop down will appear with the option to either delete the favorite or message them.
 
-4. Selecting one of the three smaller buttons from the Landing Page, you can view a list of local businesses, speakers, and/or spaces to hold events. Selecting the ‘+’ button expands a card, and you can view additional information including contact info for the individual or entity. Note: these are resources, not necessarily members, so the option to contact them from within in the app is not available.
+5. Selecting `Speakers` `Work Spaces`, or `Businesses` from the Landing Page, you can view a list speakers, local businesses, , and/or spaces to hold events. Selecting the `Learn More` button opens a modal, and you can view additional information including contact info for the individual or entity.
+
+6. An admin has access to the admin page, which is accessible by clicking `Admin` in the nav bar. On the admin page there will be charts of demographic information from all the users. You can change graphs by clicking the arrows next to the chart title. Next is a total member count registered, as well as the number of members associated with each membership plan. You can view a full list of members with their associated membership level by clicking `Member Levels`. Admins can search all the members by name and skills, outlined in step 3. On the search results clicking `Edit` will initiate a modal with that users information all in editable fields, as well as the ability to change the users access level and member level, selecting `Save` will save the changes made.
 
 User Story:
 
